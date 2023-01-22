@@ -20,7 +20,7 @@ export default defineConfig(({ command, mode }) => {
     //https代理https://www.it610.com/article/1404045715889508352.html
     //代理路径
     server: {
-      https: true,
+      https: false,
       proxy: {
         // '/api': 'http://localhost:3003'
         '/cweb/': {

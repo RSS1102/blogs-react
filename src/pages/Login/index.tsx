@@ -1,6 +1,7 @@
+import { Button } from "antd"
 import React from "react"
 function Login() {
-    return <div>1</div>
+    return <div><Button type="primary">123</Button></div>
 }
 
 export default Login
