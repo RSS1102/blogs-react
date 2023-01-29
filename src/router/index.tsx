@@ -1,13 +1,13 @@
 
 import React, { Children } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "@/pages/Layout";
+import Layout from "@/pages/layout";
 import Login from "@/pages/login";
 import Article from "@/pages/WriteArticle";
 import Classify from "@/pages/Classify";
-import Home from "@/pages/Home";
 import Manage from "@/pages/Manage";
 import ErrorElement from "./config/ErrorRoute";
+import Home from "@/pages/home";
 
 const router = createBrowserRouter([
     {
@@ -19,27 +19,15 @@ const router = createBrowserRouter([
     {
         path: "/login",
         element: <Login />,
-    }, {
-        path: "/admin",
-        element: <Home />,
+    },
+    {
+        path: "/blogs",
+        element: <Layout />,
         children: [
             {
-                path: "/home",
+                path: "home",
                 element: <Home />,
             },
-            {
-                path: "/article",
-                element: <Article />,
-            },
-            {
-                path: "/classify",
-                element: <Classify />,
-            },
-            {
-                path: "/manage",
-                element: <Manage />,
-            },
-
         ]
     }
 ])

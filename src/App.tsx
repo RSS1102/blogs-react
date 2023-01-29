@@ -1,10 +1,15 @@
 import { Routes, Route, HashRouter, RouterProvider } from "react-router-dom";
 import React from "react";
 import router from "@/router";
-import ErrorElement from "@/router/config/ErrorRoute";
+import store from "./store";
+import { Provider } from 'react-redux';
 function App() {
     return (
-        <RouterProvider router={router} />
+        <>
+            <Provider store={store}>
+                <RouterProvider router={router} />
+            </Provider>
+        </>
     )
 }
 export default App;

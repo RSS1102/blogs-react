@@ -1,4 +1,8 @@
 /* 公众样式 */
 
 @import "./assets/css/publicclass.scss";
-@import "./assets/fonts/logofont/font.css"
+@import "./assets/fonts/logofont/font.css";
+body {
+    margin: 0;
+    padding: 0;
+}
