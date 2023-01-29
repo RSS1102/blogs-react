@@ -1,0 +1,39 @@
+.login-page {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background: url(../../assets/img/login/login_background.jpg);
+    /* 让背景图基于容器大小伸缩 */
+    background-size: cover;
+}
+
+.login {
+    margin-top: 20vh;
+}
+
+.login-form {
+    backdrop-filter: blur(3px);
+    width: 385px;
+    border: 1px solid rgb(89, 163, 247);
+    border-radius: 10px;
+    padding: 30px 60px;
+    .login-form-title .ant-form-item-control-input-content {
+        text-align: center;
+        background-image: linear-gradient(to right, rgb(176, 209, 12), rgb(217, 0, 255));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-size: 30px;
+    }
+    .code {
+        width: 220px;
+        display: flex;
+        justify-content: space-between;
+        input {
+            width: 80px;
+        }
+        img {
+            width: 100px;
+        }
+    }
+}
