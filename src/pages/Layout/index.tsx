@@ -17,7 +17,7 @@ const PageLayout: React.FC = () => {
       * 文章管理：管理文章的增删改查以及其他数据的查看
       */}
     const items = [
-        { label: '数据概览', key: '/', icon: <HomeOutlined />, },
+        { label: '数据概览', key: '/home', icon: <HomeOutlined />, },
         { label: '文章发布', key: '/article', icon: <EditOutlined />, },
         { label: '分类管理', key: '/classify', icon: <FormOutlined />, },
         { label: '文章管理', key: '/manage', icon: <FileTextOutlined />, },]

@@ -1,7 +1,6 @@
 import { Button, Form, Input, message } from "antd";
 import React from "react";
 import "./index.scss";
-import CodeImg from "../../assets/img/code.jfif"
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { OnLogin } from "@/axios/model/login";

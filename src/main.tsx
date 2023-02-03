@@ -1,8 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from "@/App"
 import "@/App.css"
-
+import AuthRoute from './router/config/AuthRoute'
+import store from './store'
+import { Provider } from 'react-redux'
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <App />
+  <Provider store={store}>
+    <AuthRoute></AuthRoute>
+  </Provider>
 )
