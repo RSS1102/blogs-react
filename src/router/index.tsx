@@ -1,12 +1,12 @@
 
 import React, { Children } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "@/pages/layout";
+import Layout from "@/layout";
 import Login from "@/pages/login";
-import Article from "@/pages/WriteArticle";
-import Classify from "@/pages/Classify";
-import Manage from "@/pages/Manage";
+import PublishArticle from "@/pages/publishArticle";
+import BlogManage from "@/pages/blogManage";
 import ErrorElement from "./config/ErrorRoute";
+import GroupManage from "@/pages/groupManage";
 import Home from "@/pages/home";
 
 const router = createBrowserRouter([
@@ -22,6 +22,18 @@ const router = createBrowserRouter([
             {
                 path: "home",
                 element: <Home />,
+            },
+            {
+                path: "publishArticle",
+                element: <PublishArticle />,
+            },
+            {
+                path: "groupManage",
+                element: <GroupManage />,
+            },
+            {
+                path: "blogManage",
+                element: <BlogManage />,
             },
         ]
     }
