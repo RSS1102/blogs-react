@@ -35,36 +35,32 @@ http.interceptors.response.use(
         if (response.data.token) {
             store.dispatch(changeUser({ token: response.data.token }));
         }
-        return response.data
+        return response.data;
     },
     error => {
         switch (error.response.status) {
             case 401:
-                message.error('无身份认证,请重新登陆!');
-                break;
+                return message.error('无身份认证,请重新登陆!');
             case 403:
-                message.error('拒绝授权访问!');
-                break;
+                return message.error('拒绝授权访问!');
             case 404:
-                message.error('无法找到所请求的资源!');
-                break;
+                return message.error('无法找到所请求的资源!');
             case 405:
-                message.error('客户端请求中的方法被禁止!');
-                break;
+                return message.error('客户端请求中的方法被禁止!');
             case 406:
-                message.error('无法解析服务端返回的内容!');
-                break;
+                return message.error('无法解析服务端返回的内容!');
             case 407:
-                message.error('请使用代理进行授权!');
-                break;
+                return message.error('请使用代理进行授权!');
             case 408:
-                message.error('请求超时!');
-                break;
+                return message.error('请求超时!');
             case 410:
-                message.error('请求的资源已经不存在!');
-                break;
+                return message.error('请求的资源已经不存在!');
+            case 500:
+                return message.error('服务端错误!');
+            default:
+                return Promise.reject(error.response.data);
         }
-        return Promise.reject(error.response.data)
+
     }
 )
 
