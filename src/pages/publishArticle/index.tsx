@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Form, Input, Button, Select, message, Modal, Divider } from 'antd';
 import MyEditor from '@/components/MyEditor';
-import { getBlogsNav } from '@/utils/http/blogsNav';
-import { saveBlogs } from '@/utils/http/blogs';
 import { blogNavType } from '@/types/classifyType';
 import { ArticleFormType, blogNavsObj } from '@/types/articleTpye'
 import { MehOutlined } from '@ant-design/icons';
@@ -12,12 +10,6 @@ const PublishArticle: React.FC = () => {
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
     // 获取分类
     useEffect(() => {
-        const getBNav = async () => {
-            const getBlogsNavVal = await getBlogsNav()
-            console.log(getBlogsNavVal)
-            setBlogNavVal(getBlogsNavVal)
-        }
-        getBNav()
     }, [])
     // 获取文章
     const [form] = Form.useForm<ArticleFormType>();
@@ -34,24 +26,6 @@ const PublishArticle: React.FC = () => {
         setIsModalVisible(false)
     }
     const onFinish = () => {
-        console.log("1")
-        let { blogTitle, blogNavs, blogContent } = form.getFieldsValue(true)
-        let blogNavsObj: blogNavsObj = {
-            blogTitle,
-            blogContent,
-            blogNav: blogNavs.label,
-            blogNavId: blogNavs.value,
-
-        }
-        console.log(blogNavsObj)
-        saveBlogs(blogNavsObj).then(res => {
-            message.success('发布成功')
-            setIsModalVisible(false)
-        }).catch(err => {
-            console.log(err)
-            message.error('发布失败,请稍后再试')
-            setIsModalVisible(false)
-        })
     }
     return (
         <>

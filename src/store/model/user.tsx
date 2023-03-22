@@ -1,14 +1,15 @@
 
+import { getCookies, setCookies } from '@/utils/cookies';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
     username?: string,
-    token?: string
+    token: string
 }
-
+const token = getCookies('token')
 const initialState: UserState = {
     username: '',
-    token: '',
+    token: token ?? '',
 }
 
 export const userReducer = createSlice({
@@ -16,6 +17,7 @@ export const userReducer = createSlice({
     initialState: initialState,
     reducers: {
         changeUser: (state, action: PayloadAction<UserState>) => {
+            setCookies('token', action.payload.token)
             state.username = action.payload.username;
             state.token = action.payload.token;
         },
