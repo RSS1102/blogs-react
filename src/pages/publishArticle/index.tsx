@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import "./index.scss"
 import { Card, Form, Input, Button, Select, message, Modal, Divider } from 'antd';
-import MyEditor from '@/components/MyEditor';
+import cherryMarkdownInit from '@/components/CherryMarkdown';
 import { blogNavType } from '@/types/classifyType';
-import { ArticleFormType, blogNavsObj } from '@/types/articleTpye'
-import { MehOutlined } from '@ant-design/icons';
+import { ArticleFormType } from '@/types/articleType'
 const { Option } = Select
 const PublishArticle: React.FC = () => {
     const [blogNavVal, setBlogNavVal] = useState<Array<blogNavType>>()
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
-    // 获取分类
+
     useEffect(() => {
+        cherryMarkdownInit();
     }, [])
     // 获取文章
     const [form] = Form.useForm<ArticleFormType>();
@@ -29,10 +30,10 @@ const PublishArticle: React.FC = () => {
     }
     return (
         <>
-            <Modal title="是否发布文章" visible={isModalVisible} onOk={onFinish} onCancel={onFinishCancel}>
+            <Modal title="是否发布文章" open={isModalVisible} onOk={onFinish} onCancel={onFinishCancel}>
                 <p>请仔细核对发布的内容。</p>
             </Modal>
-                <Form initialValues={{ blogContent: null }} form={form} >
+            <Form initialValues={{ blogContent: null }} form={form} >
                 <Card >
                     <Form.Item label="标题" name='blogTitle'
                         rules={[
@@ -53,19 +54,19 @@ const PublishArticle: React.FC = () => {
                         </Select>
                     </Form.Item>
                 </Card>
-                <Divider ><MehOutlined /></Divider>
+                <Divider >文章</Divider>
                 <Card >
-                    <Form.Item label="文章" name='blogContent'
+                    <Form.Item  name='blogContent'
                         rules={[
-                            { required: true, message: '请输入文章' },
+                            { min: 50, message: '文章最最少50个字符' },
                             { max: 20000, message: '文章最多20000个字符' },
                         ]}
                     >
-                        <MyEditor></MyEditor>
+                        <div className='cherry-markdown' id='cherry-markdown'></div>
                     </Form.Item>
                 </Card>
-                </Form>
-    
+            </Form>
+
         </>
     )
 }
