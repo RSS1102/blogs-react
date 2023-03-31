@@ -1,5 +1,5 @@
 /* 公众样式 */
-
+@import  "cherry-markdown/dist/cherry-markdown.css";
 @import "./assets/css/publicclass.scss";
 @import "./assets/fonts/logofont/font.css";
 body {
