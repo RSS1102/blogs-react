@@ -4,7 +4,6 @@
     "version": "0.0.0",
     "scripts": {
         "dev": " vite  --mode development ",
-        "gitpage": "tsc && vite build  --mode gitpages",
         "build": "tsc && vite build  --mode production",
         "preview": "vite preview"
     },

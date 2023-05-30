@@ -1,15 +1,11 @@
 import { Switch, Table } from "antd";
-import { ColumnsType } from "antd/es/table";
-import React from "react";
+import { ColumnsType, TablePaginationConfig } from "antd/es/table";
+import React, {useEffect, useState } from "react";
 import "./index.scss";
+import { getGroupList } from "@/axios/model/blog";
+import { GroupData, GroupListRes } from "@/types/blog";
 
-interface GroupManageTableType {
-  id: string;
-  group: string;
-  pageNumber: number;
-  isShow: boolean;
-}
-const columns: ColumnsType<GroupManageTableType> = [
+const columns: ColumnsType<GroupData> = [
   {
     title: 'Id',
     dataIndex: 'id',
@@ -32,33 +28,37 @@ const columns: ColumnsType<GroupManageTableType> = [
     render: (_, { isShow }) => <Switch checked={isShow} onChange={switchChange} />
   },
 ]
-const switchChange=(val:boolean)=>{
+const switchChange = (val: boolean) => {
   console.log(val)
 }
-const tableData: GroupManageTableType[]=[
-  {
-    id: "1",
-    group: "1",
-    pageNumber: 1,
-    isShow: true,
-  },
-  {
-    id: "2",
-    group: "2",
-    pageNumber: 2,
-    isShow: true,
-  }
-]
 
 const GroupTable = () => {
-  return <>
-    <Table
-      columns={columns}
-      dataSource={tableData}
-    />
-    </>;
-  
+  const [groupList, setGroupList] = useState<GroupListRes['data']>([])
+  const [pagination, setPagination] = useState<TablePaginationConfig>({
+    current: 1, // 当前页码
+    pageSize: 10, // 每页显示的行数
+    total: 0
+  }); // 分页配置
 
+  const getTableList = async () => {
+    const t = await getGroupList({ current: pagination.current!, pageSize: pagination.pageSize! })
+    t.data.map(item => item.key = item.id)
+
+    console.log(t.data, t)
+    setGroupList(t.data)
+    setPagination((prevPagination) => ({ ...prevPagination, total: t.total }))
+  }
+  useEffect(() => {
+    getTableList()
+  }, [pagination.current, pagination.pageSize]);
+
+  // 分页配置
+  const handleTableChange = (pagination: TablePaginationConfig) => {
+    console.log(pagination)
+    setPagination(pagination);
+  };
+
+  return <Table columns={columns} dataSource={groupList} pagination={pagination} onChange={handleTableChange} />;
 }
 
 export default GroupTable;

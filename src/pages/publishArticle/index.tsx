@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "./index.scss"
 import { Card, Form, Input, Button, Select, message, Modal, Divider } from 'antd';
 import { blogNavType } from '@/types/classifyType';
-import { ArticleFormType } from '@/types/articleType'
+import { ArticleFormType } from '@/types/login'
 import Cherry from 'cherry-markdown';
 import { toolbarsOptions } from '@/components/CherryMarkdown/cherryMarkdownConfig';
 const { Option } = Select

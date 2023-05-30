@@ -3,7 +3,7 @@ import React from "react";
 import "./index.scss";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { OnLogin } from "@/axios/model/login";
+import { loginIn } from "@/axios/model/blog";
 const Login = () => {
     const navigate = useNavigate();
     const [form] = Form.useForm();
@@ -14,7 +14,7 @@ const Login = () => {
         form.validateFields()
             .then(() => {
                 const formData = form.getFieldsValue(true)
-                OnLogin(formData)
+                loginIn(formData)
                     .then(res => {
                         message.info(res.message)
                         navigate("/home")
@@ -25,6 +25,26 @@ const Login = () => {
             })
     };
 
+    const usernameRules = [{
+        validator: async (_: any, username: string) => {
+            if (!username) {
+                return Promise.reject(new Error('请输入账号!'));
+            } else if (username.length < 4 || username.length > 12) {
+                return Promise.reject(new Error('账号在4-12位'));
+            }
+        },
+    }]
+
+    const passwordRules = [{
+            validator: async (_: any, password: string) => {
+                if (!password) {
+                    return Promise.reject(new Error('请输入密码!'));
+                } else if (password.length < 4 || password.length > 12) {
+                    return Promise.reject(new Error('账号在4-12位'));
+                }
+            },
+        },
+    ]
     return (
         <div className="login-page">
             <div className="login">
@@ -36,42 +56,12 @@ const Login = () => {
                     <Form.Item className="login-form-title">
                         登陆
                     </Form.Item>
-                    <Form.Item label="账号" name="username" rules={[
-                        {
-                            validator: async (_, username) => {
-                                if (!username) {
-                                    return Promise.reject(new Error('请输入账号!'));
-                                } else if (username.length < 4 || username.length > 12) {
-                                    return Promise.reject(new Error('账号在4-12位'));
-                                }
-                            },
-                        },
-                    ]} >
-                        <Input prefix={<UserOutlined className="site-form-item-icon" />} />
+                    <Form.Item label="账号" name="username" rules={usernameRules} >
+                        <Input value='root' prefix={<UserOutlined className="site-form-item-icon" />} />
                     </Form.Item>
-                    <Form.Item label="密码" name="password" rules={[
-                        {
-                            validator: async (_, password) => {
-                                if (!password) {
-                                    return Promise.reject(new Error('请输入密码!'));
-                                } else if (password.length < 4 || password.length > 12) {
-                                    return Promise.reject(new Error('账号在4-12位'));
-                                }
-                            },
-                        },
-                    ]}>
-                        <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} />
+                    <Form.Item label="密码" name="password" rules={passwordRules}>
+                        <Input.Password value='root' prefix={<LockOutlined className="site-form-item-icon" />} />
                     </Form.Item>
-                    {/* <Form.Item name="code" wrapperCol={{ offset: 4, span: 16 }} rules={[
-                        {
-                            required: true,
-                            message: "请输入验证码!"
-                        },]} >
-                        <div className="code" >
-                            <Input />
-                            <img src={CodeImg} />
-                        </div>
-                    </Form.Item> */}
                     <Form.Item wrapperCol={{ offset: 4, span: 16 }}>
                         <Button type="primary" onClick={goLogin} block> 登 陆 </Button>
                     </Form.Item>
