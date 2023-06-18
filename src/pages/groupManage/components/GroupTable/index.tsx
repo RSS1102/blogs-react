@@ -1,6 +1,6 @@
 import { Switch, Table } from "antd";
 import { ColumnsType, TablePaginationConfig } from "antd/es/table";
-import React, {useEffect, useState } from "react";
+import React, { Ref, forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import "./index.scss";
 import { getGroupList } from "@/axios/model/blog";
 import { GroupData, GroupListRes } from "@/types/blog";
@@ -32,7 +32,7 @@ const switchChange = (val: boolean) => {
   console.log(val)
 }
 
-const GroupTable = () => {
+const GroupTable = forwardRef<any>((props, ref) => {
   const [groupList, setGroupList] = useState<GroupListRes['data']>([])
   const [pagination, setPagination] = useState<TablePaginationConfig>({
     current: 1, // 当前页码
@@ -40,10 +40,15 @@ const GroupTable = () => {
     total: 0
   }); // 分页配置
 
+  useImperativeHandle(ref,  () => {
+    return {
+      getTableList:async() => getTableList()
+    }
+  })
+
   const getTableList = async () => {
     const t = await getGroupList({ current: pagination.current!, pageSize: pagination.pageSize! })
     t.data.map(item => item.key = item.id)
-
     console.log(t.data, t)
     setGroupList(t.data)
     setPagination((prevPagination) => ({ ...prevPagination, total: t.total }))
@@ -58,7 +63,7 @@ const GroupTable = () => {
     setPagination(pagination);
   };
 
-  return <Table columns={columns} dataSource={groupList} pagination={pagination} onChange={handleTableChange} />;
-}
+  return <div ref={ref}><Table columns={columns} dataSource={groupList} pagination={pagination} onChange={handleTableChange} /></div>;
+})
 
 export default GroupTable;
