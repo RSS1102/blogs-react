@@ -3,14 +3,14 @@ import React from "react";
 import "./index.scss";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { loginIn } from "@/axios/model/blog";
+import { loginIn } from "@/axios/model/login";
 const Login = () => {
     const navigate = useNavigate();
     const [form] = Form.useForm();
     /**
      * @description 用户登陆
      */
-    const goLogin = () => {
+    const goLogin = () => { 
         form.validateFields()
             .then(() => {
                 const formData = form.getFieldsValue(true)

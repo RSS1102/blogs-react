@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import "./index.scss"
 import { Card, Form, Input, Button, Select, message, Modal, Divider } from 'antd';
-import { blogNavType } from '@/types/classifyType';
-import { ArticleFormType } from '@/types/login'
 import Cherry from 'cherry-markdown';
 import { toolbarsOptions } from '@/components/CherryMarkdown/cherryMarkdownConfig';
+import { getGroupList } from '@/axios/model/blog';
+import { GroupData } from '@/types/blog';
 const { Option } = Select
-const PublishArticle: React.FC = () => {
-    const [blogNavVal, setBlogNavVal] = useState<Array<blogNavType>>()
+const WriteArticle: React.FC = () => {
+    const [groupList, setGroupList] = useState<GroupData[]>([])
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
     const [cherry, setCherry] = useState<Cherry>();
+    const handGetGroupList = async () => {
+        const list = await getGroupList({ current: -1, pageSize: -1 });
+        setGroupList(list.data)
+    }
+
     useEffect(() => {
+        handGetGroupList()
         setCherry(new Cherry({
             id: 'cherry-markdown',
             value: 'init',
@@ -18,13 +24,13 @@ const PublishArticle: React.FC = () => {
         }));
     }, [])
 
-    const [form] = Form.useForm<ArticleFormType>();
+    const [form] = Form.useForm();
 
     // 发布文章
     const validArticle = () => {
         console.log(cherry!.getHtml())
         form.validateFields()
-            .then(async (values: ArticleFormType) => {
+            .then(async (values) => {
                 setIsModalVisible(true)
             })
     }
@@ -55,8 +61,8 @@ const PublishArticle: React.FC = () => {
                     <Form.Item label="分类" name='groupId'
                         rules={[{ required: true, message: '请选择分类' }]}>
                         <Select style={{ width: '100%' }} allowClear labelInValue>
-                            {blogNavVal?.map(item =>
-                                <Option key={item.id} value={item.id}>{item.blogNav}</Option>)}
+                            {groupList?.map(item =>
+                                <Option key={item.id} value={item.id}>{item.group}</Option>)}
                         </Select>
                     </Form.Item>
                 </Card>
@@ -75,4 +81,4 @@ const PublishArticle: React.FC = () => {
         </>
     )
 }
-export default PublishArticle;
+export default WriteArticle;

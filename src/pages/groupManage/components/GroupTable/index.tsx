@@ -3,7 +3,7 @@ import { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import React, { Ref, forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import "./index.scss";
 import { getGroupList } from "@/axios/model/blog";
-import { GroupData, GroupListRes } from "@/types/blog";
+import { GroupData, GetGroupListRes } from "@/types/blog";
 
 const columns: ColumnsType<GroupData> = [
   {
@@ -33,7 +33,7 @@ const switchChange = (val: boolean) => {
 }
 
 const GroupTable = forwardRef<any>((props, ref) => {
-  const [groupList, setGroupList] = useState<GroupListRes['data']>([])
+  const [groupList, setGroupList] = useState<GetGroupListRes['data']>([])
   const [pagination, setPagination] = useState<TablePaginationConfig>({
     current: 1, // 当前页码
     pageSize: 10, // 每页显示的行数

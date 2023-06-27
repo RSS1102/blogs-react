@@ -1,7 +1,7 @@
 /**
  * @description 登陆参数
  */
-export type LoginInReq = {
+export interface LoginInReq  {
     username: string,
     password: string,
     code?: string,
@@ -9,6 +9,6 @@ export type LoginInReq = {
 /**
  * @description 获取用户结果
  */
-export type LoginInRes = {
+export interface LoginInRes{
   token:string
 }
