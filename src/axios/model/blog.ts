@@ -1,4 +1,4 @@
-import { GetGroupListRes, CreateGroupReq, CreateGroupRes, UpdateGroupReq, UpdateGroupRes } from '@/types/blog';
+import { GetGroupListRes, CreateGroupReq, CreateGroupRes, UpdateGroupReq, UpdateGroupRes, CreateBlogReq, CreateBlogRes } from '@/types/blog';
 import http from '../http';
 import { AxiosResponse, PagingReq } from '@/types';
 // import { LoginInReq, LoginInRes } from '@/types/login';
@@ -37,13 +37,13 @@ export const updateGroupList = (data: UpdateGroupReq): Promise<AxiosResponse<Upd
     });
 };
 
-// /**
-//  * @description 用户登陆
-//  */
-// export const loginIn = (data: LoginInReq): Promise<AxiosResponse<LoginInRes>> => {
-//     return http({
-//         url: '/login_in',
-//         method: 'post',
-//         data
-//     });
-// };
+/**
+ * @description 发布blog -- group
+ */
+export const createBlog = (data: CreateBlogReq): Promise<AxiosResponse<CreateBlogRes>> => {
+    return http({
+        url: '/create_blog',
+        method: 'post',
+        data
+    });
+};

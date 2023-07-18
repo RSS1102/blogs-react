@@ -3,7 +3,7 @@ import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "@/layout";
 import Login from "@/pages/login";
-import WriteArticle from "@/pages/writeArticle";
+import PublishArticle from "@/pages/publishArticle";
 import BlogManage from "@/pages/blogManage";
 import ErrorElement from "./config/ErrorRoute";
 import GroupManage from "@/pages/groupManage";
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "publishArticle",
-                element: <WriteArticle />,
+                element: <PublishArticle />,
             },
             {
                 path: "groupManage",

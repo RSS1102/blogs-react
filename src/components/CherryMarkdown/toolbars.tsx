@@ -11,7 +11,6 @@ const customMenuInsertBase = () => {
   })
 }
 
-
 /**
  * @desc 自定义导航配置-插入Upgrade
  */
@@ -45,41 +44,39 @@ const customMenuTips = () => {
 /** 
  * @desc 工具栏区域配置
  */
-const toolbarsOptions: CherryOptions['toolbar'] = () => {
-  return {
-    theme: 'light',
-    toolbar: [
-      'header',
-      'bold',
-      'italic',
-      'strikethrough',
-      '|',
-      'ol',
-      'ul',
-      'checklist',
-      '|',
-      'color',
-      'ruby',
-      '|',
-      'list',
-      {
-        customMenuInsertBase: ['link', 'hr', 'br']
-      },
-      {
-        customMenuInsertUpgrade: ['code', 'formula', 'toc', 'table']
-      },
-      {
-        customMenuInsertUpload: ['image', 'audio', 'video', 'pdf', 'word']
-      },
-      'customMenuTips',
+const toolbarsOptions: CherryOptions['createToolbar']= {
+  theme: 'light',
+  toolbar: [
+    'header',
+    'bold',
+    'italic',
+    'strikethrough',
+    '|',
+    'ol',
+    'ul',
+    'checklist',
+    '|',
+    'color',
+    'ruby',
+    '|',
+    'list',
+    {
+      customMenuInsertBase: ['link', 'hr', 'br']
+    },
+    {
+      customMenuInsertUpgrade: ['code', 'formula', 'toc', 'table']
+    },
+    {
+      customMenuInsertUpload: ['image', 'audio', 'video', 'pdf', 'word']
+    },
+    'customMenuTips',
 
-    ],
-    customMenu: {
-      customMenuInsertBase: customMenuInsertBase(),
-      customMenuInsertUpgrade: customMenuInsertUpgrade(),
-      customMenuInsertUpload: customMenuInsertUpload(),
-      customMenuTips: customMenuTips(),
-    }
+  ],
+  customMenu: {
+    customMenuInsertBase: customMenuInsertBase(),
+    customMenuInsertUpgrade: customMenuInsertUpgrade(),
+    customMenuInsertUpload: customMenuInsertUpload(),
+    customMenuTips: customMenuTips(),
   }
 }
 

@@ -1,40 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import "./index.scss"
-import { Card, Form, Input, Button, Select, message, Modal, Divider } from 'antd';
+import { Card, Form, Input, Button, Select, message, Modal } from 'antd';
 import Cherry from 'cherry-markdown';
-import { toolbarsOptions } from '@/components/CherryMarkdown/cherryMarkdownConfig';
-import { getGroupList } from '@/axios/model/blog';
+import { createBlog, getGroupList } from '@/axios/model/blog';
 import { GroupData } from '@/types/blog';
+import { cherryConfig } from '@/components/CherryMarkdown';
 const { Option } = Select
-const WriteArticle: React.FC = () => {
+const PublishArticle: React.FC = () => {
+    const [cherry, setCherry] = useState<Cherry>()
     const [groupList, setGroupList] = useState<GroupData[]>([])
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
-    const [cherry, setCherry] = useState<Cherry>();
     const handGetGroupList = async () => {
         const list = await getGroupList({ current: -1, pageSize: -1 });
+        console.log('list.data', list.data)
         setGroupList(list.data)
     }
 
     useEffect(() => {
         handGetGroupList()
-        setCherry(new Cherry({
-            id: 'cherry-markdown',
-            value: 'init',
-            toolbars: toolbarsOptions(),
-        }));
+        setCherry(new Cherry(cherryConfig))
     }, [])
 
     const [form] = Form.useForm();
 
     // 发布文章
     const validArticle = () => {
-        console.log(cherry!.getHtml())
         form.validateFields()
             .then(async (values) => {
                 setIsModalVisible(true)
             })
     }
     const onPublic = () => {
+        console.log('data', form.getFieldsValue())
+        // createBlog().then(res => {
+
+        // })
         setIsModalVisible(false)
     }
     const unFinish = () => {
@@ -60,19 +60,20 @@ const WriteArticle: React.FC = () => {
                     </Form.Item>
                     <Form.Item label="分类" name='groupId'
                         rules={[{ required: true, message: '请选择分类' }]}>
-                        <Select style={{ width: '100%' }} allowClear labelInValue>
+                        <Select style={{ width: '100%' }} allowClear>
                             {groupList?.map(item =>
                                 <Option key={item.id} value={item.id}>{item.group}</Option>)}
                         </Select>
                     </Form.Item>
                 </Card>
                 <Card >
-                    <Form.Item name='content'
+                    <Form.Item name='code'
                         rules={[
                             { min: 50, message: '文章最最少50个字符' },
                             { max: 20000, message: '文章最多20000个字符' },
                         ]}
                     >
+                        {/* <textarea value='123321'></textarea> */}
                         <div className='cherry-markdown' id='cherry-markdown'></div>
                     </Form.Item>
                 </Card>
@@ -81,4 +82,4 @@ const WriteArticle: React.FC = () => {
         </>
     )
 }
-export default WriteArticle;
+export default PublishArticle;

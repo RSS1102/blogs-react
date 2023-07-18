@@ -1,8 +1,9 @@
+import { number } from "echarts/core";
 
 /**
  * @description 分组列表
  */
-export interface GroupData  {
+export interface GroupData {
     key: string;
     id: string;
     group: string;
@@ -19,7 +20,7 @@ export interface CreateGroupReq {
 /**
  * @description 创建分组
  */
-export interface CreateGroupRes  {
+export interface CreateGroupRes {
     data: number
 }
 
@@ -50,5 +51,19 @@ export interface UpdateGroupReq {
  * @description 更新分组
  */
 export interface UpdateGroupRes {
+    data: number
+}
+
+// ***********blog***********
+
+/**
+ *  @description 创建blog
+ */
+export interface CreateBlogReq {
+    group_id: number;
+    title: string;
+    content: string;
+}
+export interface CreateBlogRes {
     data: number
 }
