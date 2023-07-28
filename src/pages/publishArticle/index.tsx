@@ -31,19 +31,22 @@ const PublishArticle: React.FC = () => {
             })
     }
     const onPublic = () => {
-        console.log('data', form.getFieldsValue())
-        // createBlog().then(res => {
-
-        // })
+        const formData = form.getFieldsValue()
+        const cherryMarkdown = cherry?.getHtml()
+        const blogData = Object.assign(formData, { content: cherryMarkdown })
+        console.log(blogData)
+        createBlog(blogData).then(res => {
+            console.log(res)
+        })
         setIsModalVisible(false)
     }
-    const unFinish = () => {
+    const onCancel = () => {
 
     }
 
     return (
         <>
-            <Modal title="是否发布文章" open={isModalVisible} onOk={onPublic} onCancel={unFinish}>
+            <Modal title="是否发布文章" open={isModalVisible} onOk={onPublic} onCancel={onCancel}>
                 <p>请仔细核对发布的内容。</p>
             </Modal>
             <Form form={form} >
@@ -67,13 +70,12 @@ const PublishArticle: React.FC = () => {
                     </Form.Item>
                 </Card>
                 <Card >
-                    <Form.Item name='code'
+                    <Form.Item name='content'
                         rules={[
-                            { min: 50, message: '文章最最少50个字符' },
+                            { min: 5, message: '文章最最少5个字符' },
                             { max: 20000, message: '文章最多20000个字符' },
                         ]}
                     >
-                        {/* <textarea value='123321'></textarea> */}
                         <div className='cherry-markdown' id='cherry-markdown'></div>
                     </Form.Item>
                 </Card>

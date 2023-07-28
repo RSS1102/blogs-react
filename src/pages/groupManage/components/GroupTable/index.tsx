@@ -1,6 +1,6 @@
 import { Switch, Table } from "antd";
 import { ColumnsType, TablePaginationConfig } from "antd/es/table";
-import React, { Ref, forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import React, { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import "./index.scss";
 import { getGroupList } from "@/axios/model/blog";
 import { GroupData, GetGroupListRes } from "@/types/blog";

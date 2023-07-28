@@ -5,7 +5,8 @@ export const cherryConfig = {
   value: 'init',
   toolbars: toolbarsOptions,
   editor: {
-    // name: 'content',
-    autoSave2Textarea: true
+    id: 'content',
+    name: 'content',
+    autoSave2Textarea: true,
   }
 }
