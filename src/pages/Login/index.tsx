@@ -56,7 +56,7 @@ const Login = () => {
                     <Form.Item className="login-form-title">
                         登陆
                     </Form.Item>
-                    <Form.Item label="账号" name="username" rules={usernameRules} >
+                    <Form.Item label="账号" name="account" rules={usernameRules} >
                         <Input value='root' prefix={<UserOutlined className="site-form-item-icon" />} />
                     </Form.Item>
                     <Form.Item label="密码" name="password" rules={passwordRules}>

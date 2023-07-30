@@ -1,7 +1,7 @@
 import { message } from 'antd';
 import axios from 'axios';
 import store from '@/store';
-import { changeUser } from '@/store/model/user';
+import { setUser } from '@/store/model/user';
 const __ENV__ = import.meta.env;
 
 
@@ -33,7 +33,7 @@ http.interceptors.response.use(
     response => {
 
         if (response.data.token) {
-            store.dispatch(changeUser({ token: response.data.token }));
+            store.dispatch(setUser({ token: response.data.token, username: response.data.data }));
         }
         return response.data;
     },

@@ -1,8 +1,7 @@
-import { GetGroupListRes, CreateGroupReq, CreateGroupRes, UpdateGroupReq, UpdateGroupRes, CreateBlogReq, CreateBlogRes } from '@/types/blog';
+import { CreateBlogReq, CreateBlogRes, GetBlogsListRes } from '@/types/blogs';
 import http from '../http';
 import { AxiosResponse, PagingReq } from '@/types';
-// import { LoginInReq, LoginInRes } from '@/types/login';
-
+import { CreateGroupReq, CreateGroupRes, GetGroupListRes, UpdateGroupReq, UpdateGroupRes } from '@/types/group';
 
 /**
  * @description 创建分组 -- group
@@ -43,6 +42,17 @@ export const updateGroupList = (data: UpdateGroupReq): Promise<AxiosResponse<Upd
 export const createBlog = (data: CreateBlogReq): Promise<AxiosResponse<CreateBlogRes>> => {
     return http({
         url: '/create_blog',
+        method: 'post',
+        data
+    });
+};
+
+/**
+ * @description 查询文章列表 -- group
+ */
+export const getBlogsList = (data: PagingReq = { current: -1, pageSize: -1 }): Promise<AxiosResponse<GetBlogsListRes>> => {
+    return http({
+        url: '/select_group',
         method: 'post',
         data
     });

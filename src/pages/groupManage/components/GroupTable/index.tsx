@@ -3,7 +3,7 @@ import { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import "./index.scss";
 import { getGroupList } from "@/axios/model/blog";
-import { GroupData, GetGroupListRes } from "@/types/blog";
+import { GetGroupListRes, GroupData } from "@/types/group";
 
 const columns: ColumnsType<GroupData> = [
   {
@@ -47,11 +47,10 @@ const GroupTable = forwardRef<any>((props, ref) => {
   })
 
   const getTableList = async () => {
-    const t = await getGroupList({ current: pagination.current!, pageSize: pagination.pageSize! })
-    t.data.map(item => item.key = item.id)
-    console.log(t.data, t)
-    setGroupList(t.data)
-    setPagination((prevPagination) => ({ ...prevPagination, total: t.total }))
+    const list = await getGroupList({ current: pagination.current!, pageSize: pagination.pageSize! })
+    list.data.map(item => item.key = item.id)
+    setGroupList(list.data)
+    setPagination((prevPagination) => ({ ...prevPagination, total: list.total }))
   }
   useEffect(() => {
     getTableList()

@@ -3,7 +3,7 @@ import "./index.scss"
 import { Card, Form, Input, Button, Select, message, Modal } from 'antd';
 import Cherry from 'cherry-markdown';
 import { createBlog, getGroupList } from '@/axios/model/blog';
-import { GroupData } from '@/types/blog';
+import { GroupData } from '@/types/group';
 import { cherryConfig } from '@/components/CherryMarkdown';
 const { Option } = Select
 const PublishArticle: React.FC = () => {
