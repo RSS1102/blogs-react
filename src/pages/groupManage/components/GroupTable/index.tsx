@@ -2,7 +2,7 @@ import { Switch, Table } from "antd";
 import { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import "./index.scss";
-import { getGroupList } from "@/axios/model/blog";
+import { getGroupList } from "@/axios/model/group";
 import { GetGroupListRes, GroupData } from "@/types/group";
 
 const columns: ColumnsType<GroupData> = [
@@ -40,15 +40,15 @@ const GroupTable = forwardRef<any>((props, ref) => {
     total: 0
   }); // 分页配置
 
-  useImperativeHandle(ref,  () => {
+  useImperativeHandle(ref, () => {
     return {
-      getTableList:async() => getTableList()
+      getTableList: async () => getTableList()
     }
   })
 
   const getTableList = async () => {
     const list = await getGroupList({ current: pagination.current!, pageSize: pagination.pageSize! })
-    list.data.map(item => item.key = item.id)
+    list.data.map(item => item.key = item.id.toString())
     setGroupList(list.data)
     setPagination((prevPagination) => ({ ...prevPagination, total: list.total }))
   }

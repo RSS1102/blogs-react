@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import "./index.scss"
 import { Card, Form, Input, Button, Select, message, Modal } from 'antd';
 import Cherry from 'cherry-markdown';
-import { createBlog, getGroupList } from '@/axios/model/blog';
+import { createBlog } from '@/axios/model/blog';
 import { GroupData } from '@/types/group';
 import { cherryConfig } from '@/components/CherryMarkdown';
+import { getGroupList } from '@/axios/model/group';
 const { Option } = Select
 const PublishArticle: React.FC = () => {
     const [cherry, setCherry] = useState<Cherry>()

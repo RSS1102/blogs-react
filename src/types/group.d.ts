@@ -3,7 +3,7 @@
  */
 export interface GroupData {
   key: string;
-  id: string;
+  id: number;
   group: string;
   pageNumber: number;
   isShow: boolean;

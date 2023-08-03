@@ -4,7 +4,7 @@ import "./index.scss";
 import GroupTable from "./components/GroupTable";
 import { ExclamationCircleOutlined, MehOutlined } from "@ant-design/icons";
 import "./index.scss";
-import { createGroup } from "@/axios/model/blog";
+import { createGroup } from "@/axios/model/group";
 
 const Manage = () => {
     const [modal, contextHolder] = Modal.useModal();

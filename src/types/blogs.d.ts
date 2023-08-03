@@ -1,17 +1,18 @@
 /**
  * @description 博客信息
  */
-interface BlogField {
-    group_id: number;
+interface BlogData {
+    id: number;
+    key: string;
+    groupId: number;
+    groupIsShow: boolean;
     title: string;
     content: string;
     visitors: number;
-    is_show: boolean;
-    create_at: Date;
-    update_at: Date
+    isShow: boolean;
+    createAt: Date;
+    updateAt: Date
 }
-
-// ***********blog***********
 
 /**
  *  @description 创建blog
@@ -36,5 +37,6 @@ export interface CreateBlogRes {
  * @description Res
  */
 export interface GetBlogsListRes {
-    data: number
+    data: BlogData[];
+    total: number
 }
