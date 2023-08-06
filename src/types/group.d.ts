@@ -5,7 +5,6 @@ export interface GroupData {
   key: string;
   id: number;
   group: string;
-  pageNumber: number;
   isShow: boolean;
 }
 
@@ -38,10 +37,8 @@ export interface GetGroupListRes {
  * @description 更新分组
  * @type Req
  */
-export interface UpdateGroupReq {
-  id: number,
-  field: Partial<FieldBlog>
-}
+export interface UpdateGroupReq extends Partial<GroupData> { }
+
 /**
  * @description 更新分组
  * @type Res

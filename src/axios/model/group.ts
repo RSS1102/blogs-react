@@ -27,9 +27,9 @@ export const getGroupList = (data: PagingReq = { current: -1, pageSize: -1 }): P
 /**
  * @description 更新分组列表 -- group
  */
-export const updateGroupList = (data: UpdateGroupReq): Promise<AxiosResponse<UpdateGroupRes>> => {
+export const updateGroup= (data: UpdateGroupReq): Promise<AxiosResponse<UpdateGroupRes>> => {
   return http({
-    url: '/select_group',
+    url: '/update_group',
     method: 'post',
     data
   });
