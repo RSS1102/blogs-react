@@ -1,4 +1,4 @@
-import { CreateBlogReq, CreateBlogRes, GetBlogsListRes } from '@/types/blogs';
+import { CreateBlogReq, CreateBlogRes, GetBlogsListRes, UpdateBlogReq, UpdateBlogRes } from '@/types/blogs';
 import http from '../http';
 import { AxiosResponse, PagingReq } from '@/types';
 
@@ -20,6 +20,18 @@ export const createBlog = (data: CreateBlogReq): Promise<AxiosResponse<CreateBlo
 export const getBlogsList = (data: PagingReq = { current: -1, pageSize: -1 }): Promise<AxiosResponse<GetBlogsListRes>> => {
     return http({
         url: '/select_blog',
+        method: 'post',
+        data
+    });
+};
+
+
+/**
+ * @description 更新分组列表 -- blog
+ */
+export const updateBlog= (data: UpdateBlogReq): Promise<AxiosResponse<UpdateBlogRes>> => {
+    return http({
+        url: '/update_blog',
         method: 'post',
         data
     });

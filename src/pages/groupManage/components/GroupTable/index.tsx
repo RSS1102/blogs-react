@@ -77,11 +77,12 @@ const GroupTable = forwardRef<any>((props, ref) => {
   const groupShow = (id: number, isShow: boolean) => {
     updateGroup({ id: id, isShow: isShow })
       .then((res) => {
-        message.success(res.message);
+        res.code === 200
+          ? message.success(res.message)
+          : message.error(res.message);
         getTableList();
       })
-      .catch((err) => message.success(err.message));
-    console.log(isShow);
+      .catch((err) => message.error(err.message));
   };
 
   return (

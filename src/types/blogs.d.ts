@@ -40,3 +40,16 @@ export interface GetBlogsListRes {
     data: BlogData[];
     total: number
 }
+
+/**
+ *  @description 更新blog
+ *  @type Req
+ */
+export interface UpdateBlogReq extends Partial<GroupData> { }
+/**
+ *  @description 更新blogs
+ * @description Res
+ */
+export interface UpdateBlogRes {
+    data: number
+}
