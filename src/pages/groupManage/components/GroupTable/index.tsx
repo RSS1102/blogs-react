@@ -1,4 +1,4 @@
-import { Switch, Table, message } from "antd";
+import { Button, Switch, Table, message } from "antd";
 import { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import React, {
   forwardRef,
@@ -9,8 +9,11 @@ import React, {
 import "./index.scss";
 import { getGroupList, updateGroup } from "@/axios/model/group";
 import { GetGroupListRes, GroupData } from "@/types/group";
+import UpdateDialog from "../UpdateModal";
 
 const GroupTable = forwardRef<any>((props, ref) => {
+  const [updateModalIsOpen, setUpdateModalIsOpen] = useState<boolean>(false);
+  const [groupData, setGroupData] = useState<GroupData>({} as GroupData);
   const [groupList, setGroupList] = useState<GetGroupListRes["data"]>([]);
   const [pagination, setPagination] = useState<TablePaginationConfig>({
     current: 1, // 当前页码
@@ -45,7 +48,25 @@ const GroupTable = forwardRef<any>((props, ref) => {
         />
       ),
     },
+    {
+      title: "详情",
+      dataIndex: "data",
+      key: "data",
+      render: (_, data) => (
+        <Button
+          type="primary"
+          onClick={(_isShow) => setDetails(data)}
+        >
+          修改
+        </Button>
+      ),
+    },
   ];
+  const setDetails = (data: GroupData) => {
+    console.log(data);
+    setGroupData(data);
+    setUpdateModalIsOpen(true);
+  };
 
   useImperativeHandle(ref, () => {
     return {
@@ -53,6 +74,9 @@ const GroupTable = forwardRef<any>((props, ref) => {
     };
   });
 
+  /**
+   * @description: 获取分组列表
+   */
   const getTableList = async () => {
     const list = await getGroupList({
       current: pagination.current!,
@@ -87,6 +111,14 @@ const GroupTable = forwardRef<any>((props, ref) => {
 
   return (
     <div ref={ref}>
+      <UpdateDialog
+        updateModalIsOpen={updateModalIsOpen}
+        reverseUpdateModalIsOpen={() => {
+          setUpdateModalIsOpen(false);
+          getTableList();
+        }}
+        groupData={groupData}
+      />
       <Table
         columns={columns}
         dataSource={groupList}

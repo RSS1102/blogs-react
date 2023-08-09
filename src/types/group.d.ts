@@ -2,7 +2,7 @@
  * @description 分组列表
  */
 export interface GroupData {
-  key: string;
+  key?: string;
   id: number;
   group: string;
   isShow: boolean;
