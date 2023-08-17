@@ -24,21 +24,42 @@ const GroupTable = forwardRef<any>((props, ref) => {
   const columns: ColumnsType<GroupData> = [
     {
       title: "Id",
+      width: 100,
+      align: "center",
       dataIndex: "id",
       key: "id",
     },
     {
       title: "分组名称",
+      align: "center",
       dataIndex: "group",
       key: "group",
     },
     {
       title: "文章数量",
+      width: 100,
+      align: "center",
       dataIndex: "pageNumber",
       key: "pageNumber",
     },
     {
+      title: "创建时间",
+      width: 200,
+      align: "center",
+      dataIndex: "createAt",
+      key: "createAt",
+    },
+    {
+      title: "更新时间",
+      width: 200,
+      align: "center",
+      dataIndex: "updateAt",
+      key: "updateAt",
+    },
+    {
       title: "是否展示",
+      width: 200,
+      align: "center",
       dataIndex: "isShow",
       key: "isShow",
       render: (_, { id, isShow }) => (
@@ -50,6 +71,8 @@ const GroupTable = forwardRef<any>((props, ref) => {
     },
     {
       title: "详情",
+      width: 200,
+      align: "center",
       dataIndex: "data",
       key: "data",
       render: (_, data) => (

@@ -6,6 +6,8 @@ export interface GroupData {
   id: number;
   group: string;
   isShow: boolean;
+  updateAt: string;
+  createAt: string;
 }
 
 /**
