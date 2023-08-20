@@ -1,17 +1,17 @@
 import { Button, Switch, Table, message } from "antd";
 import { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import React, {
-  forwardRef,
   useEffect,
-  useImperativeHandle,
   useState,
 } from "react";
 import "./index.scss";
 import { BlogData } from "@/types/blogs";
 import { getBlogsList, updateBlog } from "@/axios/model/blog";
 import { updateGroup } from "@/axios/model/group";
+import { useNavigate } from "react-router";
 
-const BlogTable = forwardRef<any>((props, ref) => {
+const BlogTable = () => {
+  const navigate = useNavigate()
   const [blogsData, setBLogsData] = useState<BlogData[]>([]);
   const [pagination, setPagination] = useState<TablePaginationConfig>({
     current: 1, // 当前页码
@@ -19,11 +19,6 @@ const BlogTable = forwardRef<any>((props, ref) => {
     total: 0,
   }); // 分页配置
 
-  useImperativeHandle(ref, () => {
-    return {
-      getTableList: async () => getTableList(),
-    };
-  });
 
   const getTableList = async () => {
     const list = await getBlogsList({
@@ -80,10 +75,18 @@ const BlogTable = forwardRef<any>((props, ref) => {
       title: "文章标题",
       dataIndex: "title",
       key: "title",
-      width: 200,
+      width: 180,
       align: "center",
     },
-
+    {
+      title: "文章内容",
+      dataIndex: "contentMd",
+      key: "contentMd",
+      width: 300,
+      align: "center",
+      render: (_, { contentMd }) => (
+        contentMd.substring(0, 20) + (contentMd.length > 20 ? "..." : "")),
+    },
     {
       title: "浏览量",
       dataIndex: "visitors",
@@ -119,23 +122,20 @@ const BlogTable = forwardRef<any>((props, ref) => {
       ),
     },
     {
-      title: "文章内容",
-      dataIndex: "content",
-      key: "content",
+      title: "详细信息",
+      dataIndex: "goDetail",
+      key: "goDetail",
       width: 80,
       align: "center",
-      render: (_, { content }) => (
-        <Button
-          type="link"
-          color="#ffffff"
-        >
+      render: (_, { id }) => (
+        <Button type="link" onClick={() => navigate('/publishArticle?id=' + id)}>
           详情
         </Button>
       ),
     },
   ];
   const groupShow = (id: number, isShow: boolean) => {
-      console.log(isShow);
+    console.log(isShow);
     updateGroup({ id: id, isShow: !isShow })
       .then((res) => {
         console.log(res);
@@ -167,6 +167,6 @@ const BlogTable = forwardRef<any>((props, ref) => {
       />
     </>
   );
-});
+};
 
 export default BlogTable;

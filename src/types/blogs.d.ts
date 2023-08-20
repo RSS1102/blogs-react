@@ -7,7 +7,8 @@ interface BlogData {
     groupId: number;
     groupIsShow: boolean;
     title: string;
-    content: string;
+    contentMd: string;
+    contentHtml: string;
     visitors: number;
     isShow: boolean;
     createAt: Date;
@@ -33,12 +34,20 @@ export interface CreateBlogRes {
 }
 
 /**
- *  @description 获取blogs
+ *  @description 获取blogs列表
  * @description Res
  */
 export interface GetBlogsListRes {
     data: BlogData[];
     total: number
+}
+
+/**
+ *  @description 获取blogs
+ *  @description Res
+ */
+export interface GetBlogsRes {
+    data: BlogData
 }
 
 /**

@@ -36,6 +36,14 @@ export interface GetGroupListRes {
 }
 
 /**
+ * @description 查询分组
+ * @type Res
+ */
+export interface GetGroupRes {
+  data: GroupData;
+}
+
+/**
  * @description 更新分组
  * @type Req
  */
