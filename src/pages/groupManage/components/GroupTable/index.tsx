@@ -39,8 +39,8 @@ const GroupTable = forwardRef<any>((props, ref) => {
       title: "文章数量",
       width: 100,
       align: "center",
-      dataIndex: "pageNumber",
-      key: "pageNumber",
+      dataIndex: "blogBlogsCount",
+      key: "blogBlogsCount",
     },
     {
       title: "创建时间",
